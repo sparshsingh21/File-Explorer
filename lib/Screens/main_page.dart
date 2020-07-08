@@ -25,7 +25,6 @@ class _FileManagerState extends State<FileManager> {
   Future<void> initPlatformState() async {
     double freeSpace;
     double totalSpace;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       freeSpace = await DiskSpace.getFreeDiskSpace;
       totalSpace = await DiskSpace.getTotalDiskSpace;
@@ -40,7 +39,7 @@ class _FileManagerState extends State<FileManager> {
     });
   }
 
-// hi
+// git push test
   @override
   void initState() {
     super.initState();
@@ -260,7 +259,6 @@ class _FileManagerState extends State<FileManager> {
     }
   }
 
-  // Initialize the files and folders under this path
   void initPathFiles(String path) {
     try {
       setState(() {
@@ -274,20 +272,20 @@ class _FileManagerState extends State<FileManager> {
   }
 
   void deleteFile(FileSystemEntity file) {
-    showCupertinoDialog(
+    showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoAlertDialog(
+        return AlertDialog(
           title: Text('Delete?'),
           content: Text('Cannot be recovered'),
           actions: <Widget>[
-            CupertinoDialogAction(
+            RaisedButton(
               child: Text('Cancel', style: TextStyle(color: Colors.blue)),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            CupertinoDialogAction(
+            RaisedButton(
               child: Text('Delete', style: TextStyle(color: Colors.blue)),
               onPressed: () {
                 if (file.statSync().type == FileSystemEntityType.directory) {
@@ -314,7 +312,7 @@ class _FileManagerState extends State<FileManager> {
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: Center(
-            child: CupertinoAlertDialog(
+            child: AlertDialog(
               title: Text('Rename File'),
               content: Padding(
                 padding: EdgeInsets.only(top: 10.0),
@@ -331,13 +329,13 @@ class _FileManagerState extends State<FileManager> {
                 ),
               ),
               actions: <Widget>[
-                CupertinoDialogAction(
+                RaisedButton(
                   child: Text('Cancel', style: TextStyle(color: Colors.blue)),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
-                CupertinoDialogAction(
+                RaisedButton(
                   child: Text('Rename', style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     String newName = _controller.text;

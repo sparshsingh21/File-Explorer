@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter File Manager',
       theme: ThemeData(
-//        platform: TargetPlatform.iOS,
         primarySwatch: Colors.blue,
       ),
       home: FileManager(),
