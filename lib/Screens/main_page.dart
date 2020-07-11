@@ -34,8 +34,8 @@ class _FileManagerState extends State<FileManager> {
     if (!mounted) return;
 
     setState(() {
-      _freeSpace = freeSpace;
-      _totalSpace = totalSpace;
+      _freeSpace = freeSpace / 1024;
+      _totalSpace = totalSpace / 1024;
     });
   }
 
@@ -98,11 +98,14 @@ class _FileManagerState extends State<FileManager> {
                     if (FileSystemEntity.isFileSync(files[index].path))
                       return _buildFile(files[index]);
                     else
-                      return Column(children: <Widget>[
-                        Text('Total Space: $_totalSpace \n'),
-                        Text('Free Space: $_freeSpace'),
-                        _buildFolder(files[index]),
-                      ]);
+                      return Column(
+                        children: <Widget>[
+                          if ((index == 0))
+                            Text(
+                                'Total Space: $_totalSpace GB \n Free Space: $_freeSpace GB'),
+                          _buildFolder(files[index]),
+                        ],
+                      );
                   },
                 ),
               ),
